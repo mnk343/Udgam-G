@@ -21,7 +21,9 @@ class UpdateDoctorDetail(forms.ModelForm):
             'name',
             'age',
             'sex',
-            'blood_group',
+            'specialization',
             'contact_no',
             'email_id',
+            'qualifications',
+            'yearsOfExperience',
         ]

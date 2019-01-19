@@ -53,9 +53,9 @@ class Doctor(models.Model):
     name = models.CharField(max_length = 200 , blank = False)
     age = models.IntegerField(default = 18)
     sex = models.CharField(max_length = 100 , choices = sex )
-    specialization = models.CharField(max_length=100)
-    qualifications = models.CharField(max_length=100)
-    yearsOfExperience = models.IntegerField(max_length=10)
+    specialization = models.CharField(max_length=100, blank = True)
+    qualifications = models.CharField(max_length=100 , blank = True)
+    yearsOfExperience = models.IntegerField(default = 0)
     contact_no  = models.IntegerField()
     email_id = models.CharField(max_length=50)
 
