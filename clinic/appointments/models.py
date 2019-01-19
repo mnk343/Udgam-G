@@ -70,6 +70,9 @@ class Slot(models.Model):
     availability = models.IntegerField(default = 0 , blank = False)
     doctor = models.ForeignKey(Doctor , on_delete=models.CASCADE , null=True)
 
+    def __str__(self):
+        return self.doctor.name +  " " + self.day + " " + str(self.time)
+
 class Appointment(models.Model):
     doctorUsername = models.CharField(max_length = 200 , blank = False)
     patientUsername = models.CharField(max_length = 200 , blank = False)
@@ -77,4 +80,4 @@ class Appointment(models.Model):
     time = models.IntegerField( blank = False)
 
     def __str__(self):
-        return self.doctorUsername - self.patientUsername
+        return self.doctorUsername +  " " + self.patientUsername

@@ -3,7 +3,7 @@ from . import models
 from . import forms
 from django.shortcuts import redirect , get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 
 @login_required
 def dashboard(request):
@@ -70,3 +70,32 @@ def UpdateProfile(request , pk):
             return HttpResponseRedirect(doctor.get_absolute_url())
 
         return render(request, 'appointments/UpdateDoctorDetail.html', {'form':form, 'doctor':doctor})
+
+
+def CreateSlots(request, pk):
+    if request.user.person=='doctor':
+        doctor = get_object_or_404(models.Doctor, pk=pk)
+
+        days_week = ['Monday' , 'Tuesday' , 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        times = []
+        working_time = [11,12,15,16,17,18]
+
+        for i in range(1,25):
+            times.append(i)
+
+        for i in days_week:
+            print("\n" + i + "\n")
+            for j in times:
+                ctr=0
+                if j in working_time:
+                    ctr=3
+                models.Slot.objects.create(
+        					day = i,
+        					time = j,
+        					availability = ctr,
+        					doctor = doctor,
+        				)
+
+        return redirect('appointments:dashboard')
+    else :
+        raise HttpResponse('<h1>fuck off</h1>')
