@@ -10,7 +10,20 @@
   </div>
   <a href="{% url 'appointments:UpdateProfile' patient.id %}"><button type="button" class="btn btn-primary btn-lg">Update Profile</button></a>
   <a href="{% url 'appointments:BookAppointment' %}"><button type="button" class="btn btn-primary btn-lg">Book Appointment</button></a>
-  <button type="button" class="btn btn-primary btn-lg">Cancel Appointment</button>
   <a href="{% url 'account_logout' %}"><button type="button" class="btn btn-primary btn-lg">Logout</button></a>
-
+  <br>
+  {% if apps %}
+  <ol class="display-4">
+    <li>
+      {% for app in apps %}
+        {{ app.doctor.name }}<br>
+        {{ app.day }}<br>
+        {{ app.time }}<br>
+        <a href="{% url 'appointments:cancelAppointment' app.id %}"><button type="button" class="btn btn-primary btn-lg">Cancel Appointment</button></a>
+      {% endfor %}
+    </li>
+  </ol>
+  {% else %}
+  <h1>No appointments</h1>
+  {% endif %}
 {% endblock%}

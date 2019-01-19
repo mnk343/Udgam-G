@@ -23,8 +23,9 @@ def dashboard(request):
                 return render(request,'appointments/UpdatePatientDetail.html', {'form':form , 'patient':request.user.username} )
         else:
             patient = models.Patient.objects.get(user=request.user)
-            # forms = models.ApplyLeave.objects.filter(patient=patient)
-            return render(request,'appointments/PatientDashboard.html',{'user':request.user , 'patient':patient})
+            apps = models.Appointment.objects.filter(patient=patient)
+
+            return render(request,'appointments/PatientDashboard.html',{'user':request.user , 'patient':patient, 'apps':apps})
 
     elif request.user.person=='doctor':
         doctor = models.Doctor.objects.filter(user=request.user)
@@ -138,11 +139,27 @@ def bookSlot(request,pk):
     slot = models.Slot.objects.get(pk=pk)
     slot.availability -= 1
     slot.save()
+    patient = models.Patient.objects.get(user=request.user)
     models.Appointment.objects.create(
                 day = slot.day,
                 time = slot.time,
-                patientUsername = request.user.username,
-                doctorUsername = slot.doctor.user.username,
+                patient = patient,
+                doctor = slot.doctor,
             )
 
+    return redirect('appointments:dashboard')
+
+
+def cancelAppointment(request, pk):
+    app = models.Appointment.objects.get(pk=pk)
+    doctor = app.doctor
+    patient = app.patient
+    day = app.day
+    time = app.time
+    doc_slots = doctor.slot_set.all()
+    doc_slots = doc_slots.filter(day=day)
+    doc_slot = doc_slots.get(time=time)
+    doc_slot.availability +=1
+    doc_slot.save()
+    app.delete()
     return redirect('appointments:dashboard')

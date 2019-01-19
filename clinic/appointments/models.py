@@ -74,10 +74,10 @@ class Slot(models.Model):
         return self.doctor.name +  " " + self.day + " " + str(self.time)
 
 class Appointment(models.Model):
-    doctorUsername = models.CharField(max_length = 200 , blank = False)
-    patientUsername = models.CharField(max_length = 200 , blank = False)
+    doctor = models.ForeignKey(Doctor , on_delete=models.CASCADE , null=True)
+    patient = models.ForeignKey(Patient , on_delete=models.CASCADE , null=True)
     day = models.CharField(max_length = 100 ,choices = days , default='monday')
     time = models.IntegerField( blank = False)
 
     def __str__(self):
-        return self.doctorUsername +  " " + self.patientUsername + " " + self.day
+        return self.doctor.name +  " " + self.patient.name + " " + self.day
