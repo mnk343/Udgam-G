@@ -44,6 +44,8 @@ class Patient (models.Model):
 
     def get_absolute_url(self):
         return reverse('appointments:dashboard')
+    def __str__(self):
+        return self.name
 
 class Doctor(models.Model):
 
@@ -51,12 +53,16 @@ class Doctor(models.Model):
     name = models.CharField(max_length = 200 , blank = False)
     age = models.IntegerField(default = 18)
     sex = models.CharField(max_length = 100 , choices = sex )
-    blood_group = models.CharField(max_length=10,  choices = blood_group )
+    specialization = models.CharField(max_length=100)
+    qualifications = models.CharField(max_length=100)
+    yearsOfExperience = models.IntegerField(max_length=10)
     contact_no  = models.IntegerField()
     email_id = models.CharField(max_length=50)
 
     def get_absolute_url(self):
         return reverse('appointments:dashboard')
+    def __str__(self):
+        return self.name
 
 class Slot(models.Model):
     day = models.CharField(max_length = 100 ,choices = days , default='monday')
