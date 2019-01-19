@@ -8,7 +8,7 @@ sex = (
         ('female','female'),
      )
 
-sex = (
+blood_group = (
         ('A+','A+'),
         ('B+','B+'),
         ('AB+','AB+'),

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from . import models
 from django.contrib.auth.decorators import login_required
 @login_required
 def dashboard(request):
