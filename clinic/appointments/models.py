@@ -80,4 +80,4 @@ class Appointment(models.Model):
     time = models.IntegerField( blank = False)
 
     def __str__(self):
-        return self.doctorUsername +  " " + self.patientUsername
+        return self.doctorUsername +  " " + self.patientUsername + " " + self.day

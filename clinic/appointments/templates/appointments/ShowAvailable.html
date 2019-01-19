@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+  <div class="jumbotron">
+    <h1>Hello {{ request.user.name }}!</h1>
+  </div>
+
+  <h1> {{ day }} <br> {{ time }} </h1>
+  {% if doctors %}
+  {% for doctor,slot in doctors %}
+      <h2>{{ doctor.name }}</h2>
+      <a href="{% url 'appointments:bookSlot' slot.pk %}"><button>Book Now</button> </a>
+  {% endfor %}
+  {% endif %}
+{% endblock%}

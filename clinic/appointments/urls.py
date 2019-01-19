@@ -11,5 +11,5 @@ urlpatterns = [
     path('createSlots/<int:pk>', views.CreateSlots , name='CreateSlots'),
     path('bookAppointment', views.BookAppointment , name='BookAppointment'),
     path('ShowAvailable', views.ShowAvailable , name='ShowAvailable'),
-
+    path('bookSlot/<int:pk>', views.bookSlot , name='bookSlot'),
 ]
