@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from users.models import CustomUser
 from multiselectfield import MultiSelectField
 from django.db import models
+from django.shortcuts import reverse
 
 sex = (
         ('male','male'),
@@ -41,6 +42,9 @@ class Patient (models.Model):
     contact_no  = models.IntegerField()
     email_id = models.CharField(max_length=50)
 
+    def get_absolute_url(self):
+        return reverse('appointments:dashboard')
+
 class Doctor(models.Model):
 
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True)
@@ -50,6 +54,9 @@ class Doctor(models.Model):
     blood_group = models.CharField(max_length=10,  choices = blood_group )
     contact_no  = models.IntegerField()
     email_id = models.CharField(max_length=50)
+
+    def get_absolute_url(self):
+        return reverse('appointments:dashboard')
 
 class Slot(models.Model):
     day = models.CharField(max_length = 100 ,choices = days , default='monday')
