@@ -40,10 +40,12 @@ def dashboard(request):
                     #we are getting an error
                 return redirect('appointments:dashboard')
             else :
+                doctor = models.Doctor.objects.get(user=request.user)
                 return render(request,'appointments/UpdateDoctorDetail.html', {'form':form , 'doctor':request.user.username} )
         else:
             doctor = models.Doctor.objects.get(user=request.user)
-            return render(request,'appointments/DoctorDashboard.html',{'user':request.user , 'doctor':doctor})
+            apps = models.Appointment.objects.filter(doctor=doctor)
+            return render(request,'appointments/DoctorDashboard.html',{'user':request.user , 'doctor':doctor, 'apps':apps})
 
 def UpdateProfile(request , pk):
 
