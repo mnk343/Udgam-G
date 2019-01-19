@@ -3,6 +3,8 @@ from . import models
 from . import forms
 from django.shortcuts import redirect , get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+
 @login_required
 def dashboard(request):
     if request.user.person=='patient':
@@ -42,7 +44,7 @@ def dashboard(request):
             doctor = models.Doctor.objects.get(user=request.user)
             return render(request,'appointments/DoctorDashboard.html',{'user':request.user , 'doctor':doctor})
 
-def UpdateProfile(request):
+def UpdateProfile(request , pk):
 
     patient = get_object_or_404(models.Patient, pk=pk)
 
@@ -57,8 +59,8 @@ def UpdateProfile(request):
 
         return render(request, 'appointments/UpdatePatientDetail.html', {'form':form, 'patient':patient})
 
-    elif request.user.person == 'patient':
-        doctor = get_object_or_404(models.Doctor, pk=pk)
+    elif request.user.person == 'doctor':
+        doctor = get_object_or_404(models.Doctor, pk=pk )
         form = forms.UpdateDoctorDetail(instance=doctor)
 
         if request.method == 'POST':
