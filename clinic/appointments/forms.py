@@ -3,7 +3,7 @@ from django import forms
 
 class UpdatePatientDetail(forms.ModelForm):
     class Meta:
-        model = models.Student
+        model = models.Patient
         fields = [
             'name',
             'age',
@@ -16,7 +16,7 @@ class UpdatePatientDetail(forms.ModelForm):
 
 class UpdateDoctorDetail(forms.ModelForm):
     class Meta:
-        model = models.Dppc
+        model = models.Doctor
         fields = [
             'name',
             'age',

@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from . import models
+from . import forms
+from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 @login_required
 def dashboard(request):
@@ -16,7 +18,7 @@ def dashboard(request):
                     #we are getting an error
                 return redirect('appointments:dashboard')
             else :
-                return render(request,'appointments/PatientDetail.html', {'form':form , 'patient':request.user.username} )
+                return render(request,'appointments/UpdatePatientDetail.html', {'form':form , 'patient':request.user.username} )
         else:
             patient = models.Patient.objects.get(user=request.user)
             # forms = models.ApplyLeave.objects.filter(patient=patient)
@@ -35,7 +37,7 @@ def dashboard(request):
                     #we are getting an error
                 return redirect('appointments:dashboard')
             else :
-                return render(request,'appointments/doctor_update_detail.html', {'form':form , 'doctor':request.user.username} )
+                return render(request,'appointments/UpdateDoctorDetail.html', {'form':form , 'doctor':request.user.username} )
         else:
             doctor = models.Doctor.objects.get(user=request.user)
             return render(request,'leave_portal/doctor_dashboard.html',{'user':request.user , 'doctor':doctor})
