@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'users',
     'multiselectfield',
     'appointments',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
