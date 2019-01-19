@@ -9,5 +9,6 @@ urlpatterns = [
 
     path('updateProfile/<int:pk>', views.UpdateProfile , name='UpdateProfile'),
     path('createSlots/<int:pk>', views.CreateSlots , name='CreateSlots'),
+    path('bookAppointment', views.BookAppointment , name='BookAppointment'),
 
 ]

@@ -9,6 +9,6 @@
     <h1>Hello {{ patient.name }}!</h1>
   </div>
   <a href="{% url 'appointments:UpdateProfile' patient.id %}"><button type="button" class="btn btn-primary btn-lg">Update Profile</button></a>
-  <button type="button" class="btn btn-primary btn-lg">Book Appointment</button>
+  <a href="{% url 'appointments:BookAppointment' %}"><button type="button" class="btn btn-primary btn-lg">Book Appointment</button></a>
   <button type="button" class="btn btn-primary btn-lg">Cancel Appointment</button>
 {% endblock%}

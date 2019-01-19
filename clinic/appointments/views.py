@@ -98,4 +98,19 @@ def CreateSlots(request, pk):
 
         return redirect('appointments:dashboard')
     else :
-        raise HttpResponse('<h1>fuck off</h1>')
+        raise HttpResponse('<h1>no access</h1>')
+
+def BookAppointment(request):
+    if request.user.person=='patient':
+        form = forms.BookAppointmentForm()
+        if request.method == 'POST':
+            form = forms.BookAppointmentForm(request.POST)
+            day = request.POST['day']
+            time = int(request.POST['time'])
+            print(day + str(time))
+            if form.is_valid():
+                return redirect('appointments:dashboard') 
+        else:
+            return render(request, 'appointments/BookAppointment.html', {'form':form})
+    else :
+        raise HttpResponse('<h1>no access</h1>')
