@@ -84,7 +84,6 @@ def CreateSlots(request, pk):
             times.append(i)
 
         for i in days_week:
-            print("\n" + i + "\n")
             for j in times:
                 ctr=0
                 if j in working_time:
@@ -107,10 +106,31 @@ def BookAppointment(request):
             form = forms.BookAppointmentForm(request.POST)
             day = request.POST['day']
             time = int(request.POST['time'])
-            print(day + str(time))
             if form.is_valid():
-                return redirect('appointments:dashboard') 
+                context={'day':day, 'time':time}
+                return ShowAvailable(request , context)
         else:
             return render(request, 'appointments/BookAppointment.html', {'form':form})
     else :
         raise HttpResponse('<h1>no access</h1>')
+
+
+def ShowAvailable(request , context):
+
+    day = context['day']
+    time = context['time']
+
+    all_doctors = models.Doctor.objects.all()
+    context['doctors']=[]
+
+    for i in all_doctors:
+
+        for j in i.slot_set.all():
+
+            if j.availability>0:
+                if j.day == day and j.time == time :
+                    print("\n\n"+i.name + j.day + "\n\n")
+                    context['doctors'].append(i)
+
+    return render(request, 'appointments/ShowAvailable.html' , context)
+    

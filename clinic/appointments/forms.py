@@ -2,13 +2,13 @@ from . import models
 from django import forms
 
 days = [
-        ('monday' , 'monday') ,
-        ('tuesday' , 'tuesday') ,
-        ('wednesday' , 'wednesday') ,
-        ('thursday' , 'thursday') ,
-        ('friday' , 'friday') ,
-        ('saturday' , 'saturday') ,
-        ('sunday' , 'sunday') ,
+        ('Monday' , 'Monday') ,
+        ('Tuesday' , 'Tuesday') ,
+        ('Wednesday' , 'Wednesday') ,
+        ('Thursday' , 'Thursday') ,
+        ('Friday' , 'Friday') ,
+        ('Saturday' , 'Saturday') ,
+        ('Sunday' , 'Sunday') ,
 ]
 
 class UpdatePatientDetail(forms.ModelForm):
