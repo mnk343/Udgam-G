@@ -22,7 +22,7 @@ def dashboard(request):
         else:
             patient = models.Patient.objects.get(user=request.user)
             # forms = models.ApplyLeave.objects.filter(patient=patient)
-            return render(request,'appointments/dashboard.html',{'user':request.user , 'patient':patient})
+            return render(request,'appointments/PatientDashboard.html',{'user':request.user , 'patient':patient})
 
     elif request.user.person=='doctor':
         doctor = models.Doctor.objects.filter(user=request.user)
@@ -40,4 +40,4 @@ def dashboard(request):
                 return render(request,'appointments/UpdateDoctorDetail.html', {'form':form , 'doctor':request.user.username} )
         else:
             doctor = models.Doctor.objects.get(user=request.user)
-            return render(request,'leave_portal/doctor_dashboard.html',{'user':request.user , 'doctor':doctor})
+            return render(request,'appointments/DoctorDashboard.html',{'user':request.user , 'doctor':doctor})
