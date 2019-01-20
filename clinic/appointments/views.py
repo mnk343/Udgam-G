@@ -27,9 +27,10 @@ def dashboard(request):
         else:
             patient = models.Patient.objects.get(user=request.user)
             apps = models.Appointment.objects.filter(patient=patient)
-            apps = models.Appointment.objects.filter(cancelled=False)
-            cancelled = models.Appointment.objects.filter(cancelled=True)
-            return render(request,'appointments/PatientDashboard.html',{'user':request.user , 'patient':patient, 'apps':apps , 'cancelled':cancelled })
+            apps_new = apps.filter(cancelled=False)
+
+            cancelled = apps.filter(cancelled=True)
+            return render(request,'appointments/PatientDashboard.html',{'user':request.user , 'patient':patient, 'apps':apps_new , 'cancelled':cancelled })
 
     elif request.user.person=='doctor':
         doctor = models.Doctor.objects.filter(user=request.user)
@@ -49,10 +50,10 @@ def dashboard(request):
         else:
             doctor = models.Doctor.objects.get(user=request.user)
             apps = models.Appointment.objects.filter(doctor=doctor)
-            apps = models.Appointment.objects.filter(cancelled=False)
-            cancelled = models.Appointment.objects.filter(cancelled=True)
+            # apps = models.Appointment.objects.filter(cancelled=False)
+            # cancelled = models.Appointment.objects.filter(cancelled=True)
 
-            return render(request,'appointments/DoctorDashboard.html',{'user':request.user , 'doctor':doctor, 'apps':apps , 'cancelled':cancelled})
+            return render(request,'appointments/DoctorDashboard.html',{'user':request.user , 'doctor':doctor, 'apps':apps})
 
 def UpdateProfile(request , pk):
 
