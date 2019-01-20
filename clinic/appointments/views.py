@@ -49,8 +49,8 @@ def dashboard(request):
                 return render(request,'appointments/UpdateDoctorDetail.html', {'form':form , 'doctor':request.user.username} )
         else:
             doctor = models.Doctor.objects.get(user=request.user)
-            apps = models.Appointment.objects.filter(doctor=doctor)
-            # apps = models.Appointment.objects.filter(cancelled=False)
+            apps_all = models.Appointment.objects.filter(doctor=doctor)
+            apps = apps_all.filter(cancelled=False)
             # cancelled = models.Appointment.objects.filter(cancelled=True)
 
             return render(request,'appointments/DoctorDashboard.html',{'user':request.user , 'doctor':doctor, 'apps':apps})
