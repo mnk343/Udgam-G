@@ -21,6 +21,7 @@ class UpdatePatientDetail(forms.ModelForm):
             'blood_group',
             'contact_no',
             'email_id',
+            'profile_pic'
         ]
 
 
@@ -36,6 +37,7 @@ class UpdateDoctorDetail(forms.ModelForm):
             'email_id',
             'qualifications',
             'yearsOfExperience',
+            'profile_pic',
         ]
 
 class BookAppointmentForm(forms.Form):
