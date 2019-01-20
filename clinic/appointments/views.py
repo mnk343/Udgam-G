@@ -45,7 +45,6 @@ def dashboard(request):
                     #we are getting an error
                 return redirect('appointments:dashboard')
             else :
-                doctor = models.Doctor.objects.get(user=request.user)
                 return render(request,'appointments/UpdateDoctorDetail.html', {'form':form , 'doctor':request.user.username} )
         else:
             doctor = models.Doctor.objects.get(user=request.user)
@@ -57,11 +56,10 @@ def dashboard(request):
 
 def UpdateProfile(request , pk):
 
-    patient = get_object_or_404(models.Patient, pk=pk)
-
-    form = forms.UpdatePatientDetail(instance=patient)
-
     if request.user.person == 'patient':
+        patient = get_object_or_404(models.Patient, pk=pk)
+        form = forms.UpdatePatientDetail(instance=patient)
+
         if request.method == 'POST':
             form = forms.UpdatePatientDetail(instance=patient, data=request.POST)
             if form.is_valid():
