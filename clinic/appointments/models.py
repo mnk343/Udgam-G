@@ -34,6 +34,7 @@ days = (
 class Patient (models.Model):
 
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE , null=True)
+    profile_pic = models.ImageField(upload_to='patient', blank=True, null=True)
 
     name = models.CharField(max_length = 200 , blank = False)
     age = models.IntegerField(default = 18)
@@ -52,6 +53,8 @@ class Doctor(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length = 200 , blank = False)
     age = models.IntegerField(default = 18)
+    profile_pic = models.ImageField(upload_to='doctor', blank=True, null=True)
+
     sex = models.CharField(max_length = 100 , choices = sex )
     specialization = models.CharField(max_length=100, blank = True)
     qualifications = models.CharField(max_length=100 , blank = True)
@@ -78,6 +81,6 @@ class Appointment(models.Model):
     patient = models.ForeignKey(Patient , on_delete=models.CASCADE , null=True)
     day = models.CharField(max_length = 100 ,choices = days , default='monday')
     time = models.IntegerField( blank = False)
-
+    cancelled = models.BooleanField( default = False)
     def __str__(self):
         return self.doctor.name +  " " + self.patient.name + " " + self.day

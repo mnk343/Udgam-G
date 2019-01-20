@@ -13,4 +13,5 @@ urlpatterns = [
     path('ShowAvailable', views.ShowAvailable , name='ShowAvailable'),
     path('bookSlot/<int:pk>', views.bookSlot , name='bookSlot'),
     path('cancelAppointment/<int:pk>', views.cancelAppointment , name='cancelAppointment'),
+    path('deleteAppointment/<int:pk>', views.deleteAppointment , name='deleteAppointment'),
 ]
