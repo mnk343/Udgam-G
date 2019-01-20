@@ -9,11 +9,21 @@
     <h1>Hello {{ request.user.name }}!</h1>
   </div>
 
-  <h1> {{ day }} <br> {{ time }} </h1>
   {% if doctors %}
+  <h3> Here are the available doctors on {{ day }} between {{ time }} - {{ time | add:1 }} </h3>
   {% for doctor,slot in doctors %}
       <h2>{{ doctor.name }}</h2>
       <a href="{% url 'appointments:bookSlot' slot.pk %}"><button>Book Now</button> </a>
   {% endfor %}
+
+  {% else %}
+    <h3>Sorry but no doctors are available. Try changing the date and time . </h3>
+    <br>
+    <a href="{% url 'appointments:BookAppointment'  %}"><button type="button" class="btn btn-primary btn-lg">Try other time or date </button></a>
+    <br>
+    <br>
+    <a href="{% url 'appointments:dashboard'  %}"><button type="button" class="btn btn-primary btn-lg">Go back to dashboard</button></a>
+
   {% endif %}
+
 {% endblock%}

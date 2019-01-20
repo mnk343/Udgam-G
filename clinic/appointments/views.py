@@ -139,7 +139,6 @@ def ShowAvailable(request , context):
 
             if j.availability>0:
                 if j.day == day and j.time == time :
-                    print("\n\n"+i.name + j.day + "\n\n")
                     context['doctors'].append( ( i , j ) )
 
     return render(request, 'appointments/ShowAvailable.html' , context)
