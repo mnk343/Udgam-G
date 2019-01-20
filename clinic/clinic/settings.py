@@ -40,13 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # The following apps are required:
+    'appointments',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'users',
     'multiselectfield',
-    'appointments',
+
     'crispy_forms',
 ]
 
@@ -133,3 +134,6 @@ STATIC_URL = '/static/'
 
 # STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'users.CustomUser' # new
+# 
+# TEMPLATE_DIRS = (
+# os.path.join(BASE_DIR,'templates'), os.path.join(BASE_DIR,'templates', 'allauth'))
