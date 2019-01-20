@@ -5,6 +5,9 @@ from django.shortcuts import redirect , get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 
+def homepage(request):
+    return render(request , 'index.html')
+
 @login_required
 def dashboard(request):
     if request.user.person=='patient':
