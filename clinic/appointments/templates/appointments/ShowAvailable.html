@@ -1,19 +1,35 @@
 {% extends "base_generic.html" %}
 {% load static %}
 {% block css %}
+  <style>body{
+    margin-top:20px;
+    margin-left:20px;
+  }
+
+img{
+
+  margin-right: 20px;
+}
+
+</style>
+
 
 {% endblock %}
 
 {% block content %}
-  <div class="jumbotron">
+  <!-- <div class="jumbotron">
     <h1>Hello {{ request.user.name }}!</h1>
-  </div>
+  </div> -->
 
   {% if doctors %}
   <h3> Here are the available doctors on {{ day }} between {{ time }} - {{ time | add:1 }} </h3>
   {% for doctor,slot in doctors %}
+  <br>
+  <img style = "float:left" class="img" src="/media/{{doctor.profile_pic}}" height=130px width=150px>
       <h2>{{ doctor.name }}</h2>
+      <h4>{% if doctor.specialization %}doctor.specialization{% endif %}</h4>
       <a href="{% url 'appointments:bookSlot' slot.pk %}"><button>Book Now</button> </a>
+      <br>
   {% endfor %}
 
   {% else %}
