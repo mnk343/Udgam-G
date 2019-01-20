@@ -30,16 +30,15 @@
 		<div class="main-w3l">
 			<h1 class="logo-w3"> </h1>
 			<div class="w3layouts-main">
-				<h2><span>LOGIN</span></h2>
+				<h2><span>Are you sure ?</span></h2>
         <form action="" method="POST">
             {% csrf_token %}
             {{ form|crispy }}
-            <input type="submit" class="btn btn-success" value="Login">
-            <br>
+            <input type="submit" class="btn btn-success" value="Logout">
         </form>
+        <br>
+        <a href="{% url 'appointments:dashboard' %}"><input type="submit" class="btn btn-success" value="No"></a>
 			</div>
-
-
 		</div>
 	</div>
 
