@@ -30,11 +30,10 @@
 		<div class="main-w3l">
 			<h1 class="logo-w3"> </h1>
 			<div class="w3layouts-main">
-				<h2><span>LOGIN</span></h2>
+				<h2><span>SIGNUP</span></h2>
         <form action="" method="POST">
             {% csrf_token %}
             {{ form|crispy }}
-            <br>
             <input type="submit" class="btn btn-success" value="Save">
         </form>
 			</div>
@@ -55,8 +54,6 @@
 
 				}
 			</script>
-
-
 
 		</div>
 	</div>
