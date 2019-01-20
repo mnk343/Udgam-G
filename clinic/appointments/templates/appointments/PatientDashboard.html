@@ -10,6 +10,15 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <link href="{% static 'appointments/css/dashboard.css' %}" rel="stylesheet" type="text/css" />
+<style>
+  img{
+    margin-right: 10px;
+  }
+
+  .left-pad{
+    padding-left: 0px;
+  }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -33,42 +42,56 @@
     </li>
   </ul>
 </nav>
+
   <div class="jumbotron">
-    <h1>Hello {{ patient.name }}!</h1>
+    <h2>Hello {{ patient.name }}!</h1>
   </div>
   <br>
-  <h1 class="jumbotron">Booked Appointments</h1>
-  {% if apps %}
-  <ol class="display-4">
-    <li>
-      {% for app in apps %}
-        {{ app.doctor.name }}<br>
-        {{ app.day }}<br>
-        {{ app.time }}<br>
-        <a href="{% url 'appointments:cancelAppointment' app.id %}"><button type="button" class="btn btn-primary btn-lg">Cancel Appointment</button></a>
-      {% endfor %}
-    </li>
-  </ol>
+  <h3 class="jumbotron">Booked Appointments</h1>
 
-  {% else %}
-  <h4>No appointments</h1>
-  {% endif %}
+    {% if apps %}
+    <ol class="display-4">
+      <li>
+        {% for app in apps %}
+            <div class="left-pad">
+                <img class="img" src="/media/{{app.doctor.profile_pic}}" height=130px width=150px>
+                <div class="data"><b>Appointment</b>: 1</div>
+                <div class="data"><b>Patient</b>: {{ app.patient.name }}</div>
+                <div class="data"><b>Day</b>: {{ app.day }}</div>
+                <div class="data"><b>Time</b>: {{ app.time }}</div>
+                <!-- <form action="#">
+                    <input type="submit" value="Cancel Appointment">
+                </form> -->
+                <a href="{% url 'appointments:cancelAppointment' app.id %}"><button type="button" class="btn btn-primary btn-lg">Cancel Appointment</button></a>
+                <hr align="left" width=95%>
+            </div>
 
-  <h1 class="jumbotron">Cancelled Appointments : </h1>
+        {% endfor %}
+      </li>
+    </ol>
+    {% else %}
+    <h4 style="color : white">No appointments</h1>
+    {% endif %}
+
+  <h3 class="jumbotron">Cancelled Appointments : </h1>
   {% if cancelled %}
   <ol class="display-4">
     <li>
       {% for app in cancelled %}
-        {{ app.doctor.name }}<br>
-        {{ app.day }}<br>
-        {{ app.time }}<br>
-        <a href="{% url 'appointments:deleteAppointment' app.id %}"><button type="button" class="btn btn-primary btn-lg">Delete from history</button></a>
-        <br>
+      <div class="left-pad">
+          <img class="img" src="/media/{{doctor.profile_pic}}" height=130px width=150px>
+          <div class="data"><b>Appointment</b>: 1</div>
+          <div class="data"><b>Patient</b>: {{ app.patient.name }}</div>
+          <div class="data"><b>Day</b>: {{ app.day }}</div>
+          <div class="data"><b>Time</b>: {{ app.time }}</div>
+          <a href="{% url 'appointments:deleteAppointment' app.id %}"><button type="button" class="btn btn-primary btn-lg">Delete Appointment</button></a>
+          <hr align="left" width=95%>
+      </div>
       {% endfor %}
     </li>
   </ol>
   {% else %}
-  <h4>Hurray!! No appointments to delete</h1>
+  <h4 class="ml-4" style="color : white">Hurray!! No appointments to delete</h1>
   {% endif %}
 
 {% endblock %}
