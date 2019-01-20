@@ -81,6 +81,6 @@ class Appointment(models.Model):
     patient = models.ForeignKey(Patient , on_delete=models.CASCADE , null=True)
     day = models.CharField(max_length = 100 ,choices = days , default='monday')
     time = models.IntegerField( blank = False)
-
+    cancelled = models.BooleanField( default = False)
     def __str__(self):
         return self.doctor.name +  " " + self.patient.name + " " + self.day
