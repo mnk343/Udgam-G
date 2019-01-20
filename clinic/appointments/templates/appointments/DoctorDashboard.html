@@ -47,7 +47,7 @@
   <li>
     {% for app in apps %}
         <div class="left-pad">
-            <img class="img" src="{{MEDIA_URL}}/{{patient.profile_pic}}" height=130px width=150px>
+            <img class="img" src="/media/{{app.patient.profile_pic}}" height=130px width=150px>
             <div class="data"><b>Appointment</b>: 1</div>
             <div class="data"><b>Patient</b>: {{ app.patient.name }}</div>
             <div class="data"><b>Day</b>: {{ app.day }}</div>
